@@ -1,1 +1,1 @@
-web: bundle exec thin -R planed.ru -e $RACK_ENV
+web: bundle exec thin -R planed.ru -e $RACK_ENV start
