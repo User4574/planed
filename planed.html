@@ -50,7 +50,8 @@ div.msg {
 
         let utter = new SpeechSynthesisUtterance(ev.data);
         utter.voice = voices[Math.floor(Math.random() * voices.length)];
-        utter.rate = 1.2;
+        utter.rate = 1.3;
+        utter.lang = 'en-GB';
         speechSynthesis.speak(utter);
       };
 
