@@ -32,13 +32,15 @@ div.msg {
     <div id="overlay"></div>
     <div id="log"></div>
     <script>
-      let ws = new WebSocket("ws://plane.4574.co.uk:80");
-      let div = document.getElementById("log");
-      let loglen = 0;
       const logmax = 18;
       const timemax = 5000;
+      const div = document.getElementById("log");
+      let ws = new WebSocket("ws://plane.4574.co.uk:80");
+      let loglen = 0;
       let voices = [];
-      setTimeout(() => voices = speechSynthesis.getVoices(), 100);
+      speechSynthesis.onvoiceschanged = function() {
+        voices = speechSynthesis.getVoices();
+      }
 
       ws.onmessage = function(ev) {
         loglen += 1;
