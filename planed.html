@@ -37,7 +37,7 @@ div.msg {
       let loglen = 0;
       const logmax = 18;
       const timemax = 5000;
-      const voices = [];
+      let voices = [];
       setTimeout(() => voices = speechSynthesis.getVoices(), 100);
 
       ws.onmessage = function(ev) {
