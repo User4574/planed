@@ -43,6 +43,8 @@ div.msg {
         div.innerHTML += "<div class=\"msg\" id=\"msg" + loglen + "\">" + ev.data + "</div>";
         if (loglen > logmax)
           document.getElementById("msg" + (loglen - logmax)).remove();
+
+        speechSynthesis.speak(new SpeechSynthesisUtterance(ev.data));
       };
 
       function rantime() {
