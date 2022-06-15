@@ -32,15 +32,12 @@ div.msg {
     <div id="overlay"></div>
     <div id="log"></div>
     <script>
-      Array.prototype.sample = function(){
-        return this[Math.floor(Math.random()*this.length)];
-      }
-
       let ws = new WebSocket("ws://plane.4574.co.uk:80");
       let div = document.getElementById("log");
       let loglen = 0;
       const logmax = 18;
       const timemax = 5000;
+      while (speechSynthesis === undefined) ;
       const voices = speechSynthesis.getVoices();
 
       ws.onmessage = function(ev) {
@@ -50,7 +47,7 @@ div.msg {
           document.getElementById("msg" + (loglen - logmax)).remove();
 
         let utter = new SpeechSynthesisUtterance(ev.data);
-        utter.voice = voices.sample();
+        utter.voice = voices[Math.floor(Math.random() * voices.length)];
         utter.rate = 1.2;
         speechSynthesis.speak(utter);
       };
