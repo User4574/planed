@@ -32,11 +32,16 @@ div.msg {
     <div id="overlay"></div>
     <div id="log"></div>
     <script>
+      Array.prototype.sample = function(){
+        return this[Math.floor(Math.random()*this.length)];
+      }
+
       let ws = new WebSocket("ws://plane.4574.co.uk:80");
       let div = document.getElementById("log");
       let loglen = 0;
       const logmax = 18;
       const timemax = 5000;
+      const voices = speechSynthesis.getVoices();
 
       ws.onmessage = function(ev) {
         loglen += 1;
@@ -44,7 +49,10 @@ div.msg {
         if (loglen > logmax)
           document.getElementById("msg" + (loglen - logmax)).remove();
 
-        speechSynthesis.speak(new SpeechSynthesisUtterance(ev.data));
+        let utter = new SpeechSynthesisUtterance(ev.data);
+        utter.voice = voices.sample();
+        utter.rate = 1.2;
+        speechSynthesis.speak(utter);
       };
 
       function rantime() {
