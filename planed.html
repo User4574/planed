@@ -37,6 +37,7 @@ div.msg {
       const div = document.getElementById("log");
       let ws = new WebSocket("ws://plane.4574.co.uk:80");
       let loglen = 0;
+      /*
       let voices = [];
       speechSynthesis.onvoiceschanged = function() {
         voices = speechSynthesis.getVoices().filter(
@@ -45,6 +46,7 @@ div.msg {
           }
         );
       };
+      */
 
       ws.onmessage = function(ev) {
         loglen += 1;
@@ -52,10 +54,12 @@ div.msg {
         if (loglen > logmax)
           document.getElementById("msg" + (loglen - logmax)).remove();
 
+        /*
         let utter = new SpeechSynthesisUtterance(ev.data);
         utter.voice = voices[Math.floor(Math.random() * voices.length)];
         utter.rate = 1.3;
         speechSynthesis.speak(utter);
+        */
       };
 
       function rantime() {
