@@ -39,8 +39,12 @@ div.msg {
       let loglen = 0;
       let voices = [];
       speechSynthesis.onvoiceschanged = function() {
-        voices = speechSynthesis.getVoices();
-      }
+        voices = speechSynthesis.getVoices().filter(
+          function(v) {
+            v.lang.startsWith("en");
+          }
+        );
+      };
 
       ws.onmessage = function(ev) {
         loglen += 1;
@@ -51,7 +55,6 @@ div.msg {
         let utter = new SpeechSynthesisUtterance(ev.data);
         utter.voice = voices[Math.floor(Math.random() * voices.length)];
         utter.rate = 1.3;
-        utter.lang = 'en-GB';
         speechSynthesis.speak(utter);
       };
 
